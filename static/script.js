@@ -31,8 +31,6 @@ function renderTabla(datos) {
 function actualizarFiltros(columna, selectorId) {
     const index = headers.indexOf(columna);
     const selector = document.getElementById(selectorId);
-    // No borres la opción inicial (periodo, cargo, estado)
-    // Solo agrega las opciones dinámicas:
     const valores = [...new Set(rows.map(r => r[index]).filter(Boolean))].sort();
     for (const val of valores) {
         const opt = document.createElement("option");
