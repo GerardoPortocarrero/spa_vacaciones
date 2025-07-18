@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Vacaciones Acumuladas</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="header">
+        <img src="/static/logo.png" alt="Logo" class="logo" />
+        <div class="titles">
+            <h1>AYA Distribuciones</h1>
+            <h2>Reporte de Vacaciones Acumuladas</h2>
+        </div>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="filterPeriodo" placeholder="Filtrar por Periodo">
+        <input type="text" id="filterNombre" placeholder="Filtrar por Nombre">
+        <input type="text" id="filterCargo" placeholder="Filtrar por Cargo">
+        <input type="number" id="filterDias" placeholder="Filtrar por Días">
+    </div>
+
+    <div class="table-container">
+        <table id="vacacionesTable">
+            <thead>
+                <tr>
+                    <th>Periodo</th>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Cargo</th>
+                    <th>Ingreso</th>
+                    <th>Vacaciones</th>
+                    <th>Estado</th>
+                    <th id="diasHeader" class="sortable">Días ▲▼</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

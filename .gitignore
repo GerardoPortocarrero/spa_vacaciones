@@ -209,3 +209,4 @@ __marimo__/
 *.xlsx
 *.csv
 data.txt
+main.py

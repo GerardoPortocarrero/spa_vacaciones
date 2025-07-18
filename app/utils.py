@@ -4,7 +4,8 @@ import webbrowser
 import pandas as pd
 import msoffcrypto
 from io import BytesIO
-from .config import START_YEAR, THIS_YEAR, PORT, MONTHS, VACATION_PERIODS, VACACIONES
+from .config import START_YEAR, TODAY, THIS_YEAR, PORT, MONTHS, VACATION_PERIODS, VACACIONES
+from . import data_management as dm
 
 def setup_locale():
     try:
@@ -20,20 +21,11 @@ def open_browser():
     webbrowser.open(f"http://localhost:{PORT}")
 
 def procesar_excel():
-    decrypted = BytesIO()
-    with open(VACACIONES['file_name'], "rb") as f:
-        office_file = msoffcrypto.OfficeFile(f)
-        office_file.decrypt(decrypted)
-    decrypted.seek(0)
+    df = dm.process_data(VACACIONES)
+    df = dm.transform_data(df, TODAY, THIS_YEAR, VACATION_PERIODS, VACACIONES['states'])
 
-    df = None # procesamiento y tratamiento de df
+    # Convertir de Polars a Pandas
+    df_pd = df.to_pandas()
 
-    for col in df.columns:
-        if "FECHA" in col.upper():
-            try:
-                df[col] = pd.to_datetime(df[col], errors="coerce")
-                df[col] = df[col].dt.strftime("%d %B %Y").str.lower()
-            except Exception as e:
-                print(f"Error en columna {col}: {e}")
-
-    return df.to_csv(index=False, sep=";", encoding="utf-8-sig")
+    # Exportar como CSV separado por coma (encoding opcional)
+    return df_pd.to_csv(index=False, encoding="utf-8-sig")
