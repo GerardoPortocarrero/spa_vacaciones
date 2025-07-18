@@ -11,6 +11,9 @@ THIS_YEAR = TODAY.year
 PROJECT_ADRESS = os.path.dirname(os.path.abspath(__file__))
 LOGO_AYA = 'logo.png'
 PORT = 8001
+NO_PROGRAMADO = 'No programado'
+DIAS_GOZADOS = 'Gozados'
+SUBSIDIO = 'Subsidio'
 
 # Listas
 VACATION_PERIODS = [f"Vacaciones {y}-{y+1}" for y in range(START_YEAR, THIS_YEAR)]
@@ -37,6 +40,6 @@ VACACIONES = {
         0: 'Gozó',
         1: 'Gozando',
         2: 'Por gozar',
-        3: 'No aplica',
+        3: 'No corresponde',
     },
 }

@@ -1,6 +1,7 @@
 import pandas as pd
 import polars as pl
 import math
+from .config import NO_PROGRAMADO, DIAS_GOZADOS, SUBSIDIO
 
 # Eliminar columnas innecesarias
 def get_relevant_columns(df, document):
@@ -51,7 +52,7 @@ def str_to_date_value(valor):
 def calcular_dias(vacacion, ingreso, today, THIS_YEAR):
     aniversario = ingreso.replace(year=today.year)
 
-    if str(vacacion) == 'No definido':
+    if str(vacacion) == NO_PROGRAMADO:
         if ingreso.year < THIS_YEAR:
             aniversario = aniversario.replace(year=aniversario.year - 1)
     elif (today < vacacion) or (today > vacacion and today < aniversario):
@@ -93,10 +94,10 @@ def expandir_vacaciones(df: pl.DataFrame, TODAY, THIS_YEAR, VACATION_PERIODS: li
             dias = ""
 
             # Si es SUBSIDIO
-            if str(vacacion).strip().upper() == "SUBSIDIO":
-                vacacion = 'Subsidio'
+            if str(vacacion).strip().upper() == SUBSIDIO.upper():
+                vacacion = SUBSIDIO
                 estado = states[3]  # 'No aplica'
-                dias = "Perdidos"
+                dias = 0.0
 
             # Si está vacío tipo NaN y el periodo es menor al año actual
             elif  PERIOD_YEAR < THIS_YEAR:
@@ -105,14 +106,14 @@ def expandir_vacaciones(df: pl.DataFrame, TODAY, THIS_YEAR, VACATION_PERIODS: li
                 else:
                     vacacion = str_to_date_value(vacacion)
                     estado = states[0]  # 'Gozó'
-                    dias = "Consumidos"
+                    dias = DIAS_GOZADOS
 
             # Si esta vacio o es fecha correcta y el periodo es del año actual
             else:                
                 if PERIOD_YEAR == THIS_YEAR:
                     # Si la fecha esta vacia
                     if es_nan(vacacion):
-                        vacacion = 'No definido'
+                        vacacion = NO_PROGRAMADO
                         estado = states[3]  # 'No aplica'
                         dias = calcular_dias(vacacion, ingreso, TODAY, THIS_YEAR)
                     # Si la fecha es correcta
