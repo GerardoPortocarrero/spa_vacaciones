@@ -28,4 +28,4 @@ def procesar_excel():
     df_pd = df.to_pandas()
 
     # Exportar como CSV separado por coma (encoding opcional)
-    return df_pd.to_csv(index=False, encoding="utf-8-sig")
+    return df_pd.to_csv(index=False, sep=";", encoding="utf-8-sig")

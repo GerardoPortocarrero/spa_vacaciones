@@ -176,8 +176,6 @@ def transform_data(df, TODAY, THIS_YEAR, VACATION_PERIODS, STATES):
     # Cambiar tipo de columna a fecha
     df = str_to_date(df, 'Fecha Ingreso')
 
-    print(df.schema)
-
     # Calcular historial, vacaciones y estado
     df = expandir_vacaciones(df, TODAY, THIS_YEAR, VACATION_PERIODS, STATES)
 

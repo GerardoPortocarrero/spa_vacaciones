@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Vacaciones Acumuladas</title>
-    <link rel="stylesheet" href="/static/style.css" />
+  <meta charset="UTF-8" />
+  <title>Registro de Vacaciones</title>
+  <link rel="stylesheet" href="/static/style.css?v=1">
 </head>
 <body>
-    <div class="header">
-        <img src="/static/logo.png" alt="Logo" class="logo" />
-        <div class="titles">
-            <h1>AYA Distribuciones</h1>
-            <h2>Reporte de Vacaciones Acumuladas</h2>
-        </div>
+  <header>
+    <img src="static/logo.png" alt="Logo AYA">
+    <div class="title-block">
+      <h1>Registro de Vacaciones</h1>
+      <span>A Y A DISTRIBUCIONES E.I.R.L</span>
     </div>
+  </header>
 
-    <div class="filters">
-        <input type="text" id="filterPeriodo" placeholder="Filtrar por Periodo">
-        <input type="text" id="filterNombre" placeholder="Filtrar por Nombre">
-        <input type="text" id="filterCargo" placeholder="Filtrar por Cargo">
-        <input type="number" id="filterDias" placeholder="Filtrar por Días">
-    </div>
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Buscar por Nombre, Cargo, DNI o Estado...">
+  </div>
 
-    <div class="table-container">
-        <table id="vacacionesTable">
-            <thead>
-                <tr>
-                    <th>Periodo</th>
-                    <th>Nombre</th>
-                    <th>DNI</th>
-                    <th>Cargo</th>
-                    <th>Ingreso</th>
-                    <th>Vacaciones</th>
-                    <th>Estado</th>
-                    <th id="diasHeader" class="sortable">Días ▲▼</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+  <div class="filters">
+    <select id="periodoFilter"><option value="">PERIODO</option></select>
+    <select id="cargoFilter"><option value="">CARGO</option></select>
+    <select id="estadoFilter"><option value="">ESTADO</option></select>
+  </div>
 
-    <script src="/static/script.js"></script>
+  <div class="download-container">
+    <a class="download-link" onclick="descargarCSV()">Descargar CSV</a>
+  </div>
+
+  <table id="data-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="/static/script.js"></script>
 </body>
 </html>

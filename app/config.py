@@ -14,7 +14,7 @@ PORT = 8001
 
 # Listas
 VACATION_PERIODS = [f"Vacaciones {y}-{y+1}" for y in range(START_YEAR, THIS_YEAR)]
-print(VACATION_PERIODS)
+
 # Diccionarios
 MONTHS = {
     1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril', 5: 'Mayo', 6: 'Junio',
